@@ -1,73 +1,197 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Education API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This is a RESTful API built with NestJS for managing cars, garages, and faults. The API provides endpoints to create, read, update, and delete records for cars, garages, and faults. It also includes Swagger documentation for easy testing and understanding of the API.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Table of Contents
 
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Database](#database)
+- [API Endpoints](#api-endpoints)
+  - [Cars](#cars)
+  - [Garages](#garages)
+  - [Faults](#faults)
+- [Swagger Documentation](#swagger-documentation)
+- [Migration](#migration)
+- [Running the Application](#running-the-application)
 
 ## Installation
 
-```bash
-$ npm install
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-repo/education-api.git
+   cd education-api
+   ```
+
+2. Install the dependencies:
+   ```bash
+   npm install
+   ```
+
+## Configuration
+
+Create a `.env` file in the root directory of the project and add the following environment variables:
+
+```env
+DATABASE_HOST=localhost
+DATABASE_NAME=education
 ```
 
-## Running the app
+## Database
+
+The application uses PostgreSQL as the database. Make sure you have PostgreSQL installed and running. You can configure the database connection in the `.env` file.
+
+## API Endpoints
+
+### Cars
+
+- **Create a new car**
+  - **Method:** `POST`
+  - **URL:** `/api/cars`
+  - **Body:**
+    ```json
+    {
+      "brand": "Toyota",
+      "color": "white",
+      "faults": [1, 2, 3],
+      "garageId": 1
+    }
+    ```
+
+- **Get all cars**
+  - **Method:** `GET`
+  - **URL:** `/api/cars`
+
+- **Get a car by ID**
+  - **Method:** `GET`
+  - **URL:** `/api/cars/:id`
+
+- **Get faults by brand**
+  - **Method:** `GET`
+  - **URL:** `/api/cars/brand`
+
+- **Update a car**
+  - **Method:** `PUT`
+  - **URL:** `/api/cars/:id`
+  - **Body:**
+    ```json
+    {
+      "brand": "Toyota",
+      "color": "white",
+      "faults": [1, 2, 3],
+      "garageId": 1
+    }
+    ```
+
+- **Delete a car**
+  - **Method:** `DELETE`
+  - **URL:** `/api/cars/:id`
+
+### Garages
+
+- **Create a new garage**
+  - **Method:** `POST`
+  - **URL:** `/api/garages`
+  - **Body:**
+    ```json
+    {
+      "address": "ул. Главная, 123",
+      "capacity": 10
+    }
+    ```
+
+- **Get all garages**
+  - **Method:** `GET`
+  - **URL:** `/api/garages`
+
+- **Get a garage by ID**
+  - **Method:** `GET`
+  - **URL:** `/api/garages/:id`
+
+- **Get incomplete information about garages**
+  - **Method:** `GET`
+  - **URL:** `/api/garages/incomplete`
+
+- **Update a garage**
+  - **Method:** `PUT`
+  - **URL:** `/api/garages/:id`
+  - **Body:**
+    ```json
+    {
+      "address": "ул. Главная, 123",
+      "capacity": 10
+    }
+    ```
+
+- **Delete a garage**
+  - **Method:** `DELETE`
+  - **URL:** `/api/garages/:id`
+
+### Faults
+
+- **Create a new fault**
+  - **Method:** `POST`
+  - **URL:** `/api/faults`
+  - **Body:**
+    ```json
+    {
+      "name": "Поломка двигателя",
+      "description": "Двигатель перестал работать",
+      "price": 1000
+    }
+    ```
+
+- **Get all faults**
+  - **Method:** `GET`
+  - **URL:** `/api/faults`
+
+- **Get a fault by ID**
+  - **Method:** `GET`
+  - **URL:** `/api/faults/:id`
+
+- **Get incomplete information about faults**
+  - **Method:** `GET`
+  - **URL:** `/api/faults/incomplete`
+
+- **Update a fault**
+  - **Method:** `PUT`
+  - **URL:** `/api/faults/:id`
+  - **Body:**
+    ```json
+    {
+      "name": "Поломка двигателя",
+      "description": "Двигатель перестал работать",
+      "price": 1000
+    }
+    ```
+
+- **Delete a fault**
+  - **Method:** `DELETE`
+  - **URL:** `/api/faults/:id`
+
+## Swagger Documentation
+
+Swagger documentation is available at `http://localhost:3001/api_docs` when the application is running. It provides a user-friendly interface to test the API endpoints.
+
+## Migration
+
+The application uses TypeORM for database migrations. To run the migrations, use the following command:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm run typeorm migration:run
 ```
 
-## Test
+## Running the Application
 
-```bash
-# unit tests
-$ npm run test
+1. Start the application:
+   ```bash
+   npm run start
+   ```
 
-# e2e tests
-$ npm run test:e2e
+2. The API will be available at `http://localhost:3001/api`.
 
-# test coverage
-$ npm run test:cov
-```
+3. Swagger documentation will be available at `http://localhost:3001/api_docs`.
 
-## Support
+---
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+This README provides an overview of the Education API, including installation instructions, configuration details, API endpoints, and how to run the application. If you have any questions or need further assistance, please feel free to contact the maintainers.
