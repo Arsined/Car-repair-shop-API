@@ -191,7 +191,3 @@ npm run typeorm migration:run
 2. The API will be available at `http://localhost:3001/api`.
 
 3. Swagger documentation will be available at `http://localhost:3001/api_docs`.
-
----
-
-This README provides an overview of the Education API, including installation instructions, configuration details, API endpoints, and how to run the application. If you have any questions or need further assistance, please feel free to contact the maintainers.
