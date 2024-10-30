@@ -19,8 +19,8 @@ This is a RESTful API built with NestJS for managing cars, garages, and faults. 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/education-api.git
-   cd education-api
+   git clone https://github.com/Arsined/Car-repair-shop-API
+   cd Car-repair-shop-API-main
    ```
 
 2. Install the dependencies:
